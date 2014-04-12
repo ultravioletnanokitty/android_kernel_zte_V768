@@ -1,0 +1,47 @@
+7[?47h[?1h=[1;46r[m[H[2J[46;1H"lcd_HX8357C_T35JKS18C1TP_compatible_green.h" [dos] 361L, 8999C[46;37H.h" [46;41H[K[46;41H[dos] 361L, 8975C[1;1H[34m[47m+ +-- 18 lines: **************************************************[m[7m|[m
+[34m[47m  [m[34m*[m[63C[7m|[m
+[34m[47m  [m[34m*  PURPOSE:[m[53C[7m|[m
+[34m[47m  [m[34m*    This is the LCD-specific code for a hx8357c module.[m[8C[7m|[m
+[34m[47m  [m[34m*[m[63C[7m|[m
+[34m[47m  [m[34m****************************************************************[m[7m|[m
+[34m[47m  [m[64C[7m|[m
+[34m[47m  [m[35m[45m#ifndef __LCD_HX8357C_T35JKS18C1TP_[m[1m[35m[41mGREEN_[m[35m[45mH__[m[45m                    [m[7m|[m
+[34m[47m  [m[35m[45m#define __LCD_HX8357C_T35JKS18C1TP_[m[1m[35m[41mGREEN_[m[35m[45mH__[m[45m                    [m[7m|[m
+[34m[47m  [m[64C[7m|[m
+[34m[47m  [m[35m#include [m[31m"lcd_dsi_drv.h"[m[40C[7m|[m
+[34m[47m  [m[64C[7m|[m
+[34m[47m  [m[35m#ifdef LCD_INFO_ALIAS[m[43C[7m|[m
+[34m[47m  [m[35m#undef LCD_INFO_ALIAS[m[43C[7m|[m
+[34m[47m  [m[35m#endif[m[58C[7m|[m
+[34m[47m  [m[64C[7m|[m
+[34m[47m  [m[35m[45m#define LCD_INFO_ALIAS(var) [m[45m    [m[35m[45mhx8357c_t35jks18c1tp[m[1m[35m[41m_green[m[35m[45m##_##v[m[7m|[m
+[34m[47m  [m[64C[7m|[m
+[34m[47m  [m[35m#define DSI_VC            ([m[31m0[m[35m)[m[35C[7m|[m
+[34m[47m  [m[34m//#define DSI_CMND_IS_LP    TRUE  // display init comm LP or HS [m[7m|[m
+[34m[47m  [m[64C[7m|[m
+[34m[47m  [m[64C[7m|[m
+[34m[47m  [m[35m#define LCD_WIDTH [m[31m320[m[43C[7m|[m
+[34m[47m+ +-- 69 lines: #define LCD_HEIGHT 480----------------------------[m[7m|[m
+[34m[47m  [m[64C[7m|[m
+[34m[47m  [m[32mstatic[m [32muint8_t[m LCD_INFO_ALIAS(param2)[] =  {[31m0x37[m, [31m0x27[m};[8C[7m|[m
+[34m[47m  [m[32mstatic[m [32muint8_t[m LCD_INFO_ALIAS(param7)[] =  {[31m0x99[m, [31m0x01[m};[8C[7m|[m
+[34m[47m  [m[32mstatic[m [32muint8_t[m LCD_INFO_ALIAS(param8)[] =  {[31m0x01[m,[31m0x01[m,[31m0x67[m};    [7m|[m
+[34m[47m  [m[64C[7m|[m
+[34m[47m  [m[32mstatic[m [32muint8_t[m LCD_INFO_ALIAS(param3)[] = {[31m0x00[m,[34m//DP[m[12C[7m|[m
+[34m[47m  [m[45m         [m[31m[45m0x1[m[1m[31m[41m3[m[45m,[m[34m[45m//BT[m[45m                                              [m[7m|[m
+[34m[47m  [m[45m         [m[31m[45m0x1[m[1m[31m[41mE[m[45m,[m[34m[45m//VSPR[m[45m                                            [m[7m|[m
+[34m[47m  [m[45m         [m[31m[45m0x1[m[1m[31m[41mE[m[45m,[m[34m[45m//VSNR[m[45m                                            [m[7m|[m
+[34m[47m  [m[8C [31m0x85[m,[34m//AP[m[46C[7m|[m
+[34m[47m  [m[8C [31m0xAA[m};[34m//FS[m[45C[7m|[m
+[34m[47m  [m[64C[7m|[m
+[34m[47m  [m[32mstatic[m [32muint8_t[m LCD_INFO_ALIAS(param4)[] =  {[31m0x60[m,[34m//OPON[m[9C[7m|[m
+[34m[47m  [m[8C [31m0x50[m,[34m//OPON[m[44C[7m|[m
+[34m[47m  [m[8C [31m0x01[m,[34m//STBA[m[44C[7m|[m
+[34m[47m+ +--147 lines: 0x3C,//STBA---------------------------------------[m[7m|[m
+[34m[47m  [m    {WR_CMND_MULTIPLE_DATA     ,    [31m0xB9[m    , [31m0[m     ,[31m3[m,  LCD_INF[7m|[m
+[34m[47m  [m    {SLEEP_MS,  [31m0[m, [31m1[m},[42C[7m|[m
+[34m[47m  [m[64C[7m|[m
+[34m[47m  [m[7C {WR_CMND_DATA,   [31m0xCC[m,  [31m0x05[m}, [34m//Set Panel[m[14C[7m|[m
+[1m[7mlcd_HX8357C_T35JKS18C1TP_compatible_green.h     1,1            Top [m[1;68H[34m[47m+ +-- 18 lines: *************************************************[2;68H  [m[34m*[m[3;68H[34m[47m  [m[34m*  PURPOSE:[m[4;68H[34m[47m  [m[34m*    This is the LCD-specific code for a hx8357c module.[m[5;68H[34m[47m  [m[34m*[m[6;68H[34m[47m  [m[34m***************************************************************[m[7;68H[34m[47m  [8;68H  [m[35m[45m#ifndef __LCD_HX8357C_T35JKS18C1TP_H__[m[45m                         [m[9;68H[34m[47m  [m[35m[45m#define __LCD_HX8357C_T35JKS18C1TP_H__[m[45m                         [m[10;68H[34m[47m  [11;68H  [m[35m#include [m[31m"lcd_dsi_drv.h"[m[12;68H[34m[47m  [13;68H  [m[35m#ifdef LCD_INFO_ALIAS[m[14;68H[34m[47m  [m[35m#undef LCD_INFO_ALIAS[m[15;68H[34m[47m  [m[35m#endif[m[16;68H[34m[47m  [17;68H  [m[35m[45m#define LCD_INFO_ALIAS(var) [m[45m    [m[35m[45mhx8357c_t35jks18c1tp##_##var[m[45m   [m[18;68H[34m[47m  [19;68H  [m[35m#define DSI_VC            ([m[31m0[m[35m)[m[20;68H[34m[47m  [m[34m//#define DSI_CMND_IS_LP    TRUE  // display init comm LP or HS[m[21;68H[34m[47m  [22;68H  [23;68H  [m[35m#define LCD_WIDTH [m[31m320[m[24;68H[34m[47m+ +-- 69 lines: #define LCD_HEIGHT 480---------------------------[25;68H  [26;68H  [m[32mstatic[m [32muint8_t[m LCD_INFO_ALIAS(param2)[] =  {[31m0x37[m, [31m0x27[m};[27;68H[34m[47m  [m[32mstatic[m [32muint8_t[m LCD_INFO_ALIAS(param7)[] =  {[31m0x99[m, [31m0x01[m};[28;68H[34m[47m  [m[32mstatic[m [32muint8_t[m LCD_INFO_ALIAS(param8)[] =  {[31m0x01[m,[31m0x01[m,[31m0x67[m};[29;68H[34m[47m  [30;68H  [m[32mstatic[m [32muint8_t[m LCD_INFO_ALIAS(param3)[] = {[31m0x00[m,[34m//DP[m[31;68H[34m[47m  [m[45m         [m[31m[45m0x1[m[1m[31m[41m5[m[45m,[m[34m[45m//BT[m[45m                                             [m[32;68H[34m[47m  [m[45m         [m[31m[45m0x1[m[1m[31m[41m8[m[45m,[m[34m[45m//VSPR[m[45m                                           [m[33;68H[34m[47m  [m[45m         [m[31m[45m0x1[m[1m[31m[41m8[m[45m,[m[34m[45m//VSNR[m[45m                                           [m[34;68H[34m[47m  [m[8C [31m0x85[m,[34m//AP[m[35;68H[34m[47m  [m[8C [31m0xAA[m};[34m//FS[m[36;68H[34m[47m  [37;68H  [m[32mstatic[m [32muint8_t[m LCD_INFO_ALIAS(param4)[] =  {[31m0x60[m,[34m//OPON[m[38;68H[34m[47m  [m[8C [31m0x50[m,[34m//OPON[m[39;68H[34m[47m  [m[8C [31m0x01[m,[34m//STBA[m[40;68H[34m[47m+ +--147 lines: 0x3C,//STBA--------------------------------------[41;68H  [m    {WR_CMND_MULTIPLE_DATA     ,    [31m0xB9[m    , [31m0[m     ,[31m3[m,  LCD_IN[42;68H[34m[47m  [m    {SLEEP_MS,  [31m0[m, [31m1[m},[43;68H[34m[47m  [44;68H  [m[7C {WR_CMND_DATA,   [31m0xCC[m,  [31m0x05[m}, [34m//Set Panel[m[45;68H[7mlcd_HX8357C_T35JKS18C1TP_compatible.h          1,1            Top[1;3H[m[46;1HType  :quit<Enter>  to exit Vim[46;32H[K[1;3H[46;1H[?1l>[2J[?47l8Vim: Error reading input, exiting...
+Vim: Finished.
+[46;1H2 files to edit

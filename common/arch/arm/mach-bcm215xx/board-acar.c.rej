@@ -1,0 +1,10 @@
+--- arch/arm/mach-bcm215xx/board-acar.c
++++ arch/arm/mach-bcm215xx/board-acar.c
+@@ -813,6 +846,7 @@
+ 	 .irq = GPIO_TO_IRQ(PEN_IRQ_GPIO),
+ 	},
+ #endif /* CONFIG_TOUCHSCREEN_MSI_ATMEGA168 */
++
+  };  
+ 
+ static void bcm21553_add_gpio_i2c_slaves(void)

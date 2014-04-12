@@ -1,0 +1,14 @@
+config BCMDHD_4330_DRIVER
+	bool "BCMDHD_4330_DRIVER"
+
+config BROADCOM_WIFI_RESERVED_MEM
+	bool "Enable Wifi Static MEM"
+
+#	depends on MMC
+	---help---
+	  This module adds support for wireless adapters based on
+	  BCM4330 chipset for the Android Gingerbread.
+	  If you choose to build a module, it'll be called bcm4330. Say M if
+	  unsure.
+
+

@@ -1,0 +1,49 @@
+config FB_BCM_116X
+        tristate "BCM 116X platform framebuffer support"
+        depends on FB_BCM && ARCH_BCM116X
+        default n
+
+config FB_BCM_215XX
+        tristate "BCM 215XX platform framebuffer support"
+        depends on FB_BCM && ARCH_BCM215XX
+        default n
+#
+#	Display Controller Drivers
+#	- Legacy DPIx/DBIx Interface controller
+#	- MIPI DSI controller
+#
+choice
+	prompt "Display Controller"
+	depends on FB_BCM_215XX
+	help
+	   Platform has multiple display controllers supported. System
+	   should use one such controller to interface with the display device.
+#
+#	Controllers.
+#
+config LCD_CONTROLLER_LEGACY
+	boolean "Legacy Z80/M68/DBIx Display Controller"
+	select BCM215XX_DSS
+	help
+	   Legacy display interface controller that supports Z80/M68/DBIx.
+
+config LCD_CONTROLLER_DSI
+	boolean "MIPI DSI Controller"
+	select BCM215XX_DSS
+	help
+	   MIPI DSI controller
+
+endchoice
+
+        
+config FB_BRCM_DSI
+		tristate "Broadcom Platform DSI Framebuffer support"
+    	default n
+		help
+	 	 This framebuffer device driver is for the Broadcom dsi interface.
+
+source "drivers/video/broadcom/bmem_wrapper/Kconfig"
+source "drivers/video/broadcom/dss/Kconfig"
+source "drivers/video/broadcom/displays/Kconfig"
+source "drivers/video/broadcom/hantro/memalloc_wrapper/Kconfig"
+source "drivers/video/broadcom/ge/gememalloc_wrapper/Kconfig"

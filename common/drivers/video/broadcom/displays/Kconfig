@@ -1,0 +1,197 @@
+menu "Broadcom Display Device Drivers"
+
+config PANEL_MAGNA_D51E5TA7601
+        tristate "Magna TrulyHVGA LCD Panel with D51E5TA7601 controller"
+        default N
+        help
+          Magna TrulyHVGA LCD Panel with D51E5TA7601 controller
+
+config LCD_DRV_ALL
+        tristate "LCD Panel- Compatible all lcd driver ic."
+        default N
+        help
+          Compatible all lcd driver ic.
+          
+#xiongbiao@wind-mobi.com 2012.02.09 begin
+#support mipi lcd compatible on L301          
+config LCD_DSI_DRV_ALL
+        tristate "mipi LCD Panel- Compatible all dsi lcd driver ic."
+        default N
+        help
+          Compatible all dsi lcd driver ic.
+#xiongbiao@wind-mobi.com 2012.02.09 end  
+
+#xiongbiao@wind-mobi.com 2012.02.20 begin
+#support mipi lcd compatible on L301          
+config LCD_L400_DSI_DRV_ALL
+        tristate "mipi LCD Panel- Compatible all dsi lcd driver ic on L400."
+        default N
+        help
+          Compatible all dsi lcd driver ic.
+#xiongbiao@wind-mobi.com 2012.02.20 end  
+      
+config BCM_LCD_NT35582
+        tristate "LCD Panel- N35582 controller"
+        default N
+        help
+	  WVGA LCD panel (N35582 controller)
+
+config BCM_LCD_S6D04H0A01
+        tristate "LCD Panel- S6D04H0A01 controller"
+        default N
+        help
+	  QVGA LCD panel (S6D04H0A01 controller)
+
+config BCM_LCD_S6D04H0A01_TASSVE
+        tristate "LCD Panel- S6D04H0A01 controller"
+        default N
+        help
+	  QVGA LCD panel (S6D04H0A01 controller)	  
+
+config BCM_LCD_ILI9341_BOE
+        tristate "LCD Panel- S6D04H0A01 controller"
+        default Y
+        help
+         QVGA LCD panel (BOE controller)
+
+config BCM_LCD_ILI9341_BOE_REV05
+        tristate "LCD Panel- S6D04H0A01 controller"
+        default Y
+        help
+         QVGA LCD panel (BOE controller)
+
+config BCM_LCD_S6D04K1
+        tristate "LCD Panel- S6D04K1 controller"
+        default N
+        help
+	  QVGA LCD panel (S6D04H0A01 controller)
+	  
+config BCM_LCD_R61581
+        tristate "LCD Controller- R61581 controller"
+        default N
+        help
+	  HVGA LCD panel (Renesas R61581 controller)
+config BCM_LCD_R61581B0
+        tristate "LCD Controller- R61581B0 controller"
+        default N
+        help
+	  HVGA LCD panel (Renesas R61581B0 controller)
+	  
+config BCM_LCD_ILI9481
+        tristate "LCD Controller- ILI9481 controller"
+        default N
+        help
+	  HVGA LCD panel (ILI9481 controller)
+config BCM_LCD_ILI9486L
+        tristate "LCD Controller- ILI9486L controller"
+        default N
+        help
+	  HVGA LCD panel (ILI9486L controller)
+#shaojiang@wind-mobi.com patch CSP496192 for lcd driver begin
+config BCM_LCD_HX8357C_GZ3513
+        tristate "LCD Controller- HX8357 controller"
+        default N
+        help
+	  HVGA DSI LCD panel (HX8357/GZ3513 controller)
+#shaojiang@wind-mobi.com patch CSP496192 for lcd driver end
+	  
+# xiongbiao@wind-mobi.com 2011.10.31 begin
+# Add HX8357B LCD support.
+config BCM_LCD_HX8357B
+        tristate "LCD Controller- HX8357B controller"
+        default N
+        help
+	  HVGA LCD panel (HX8357B controller)
+# xiongbiao@wind-mobi.com 2011.10.31 end
+
+# xiongbiao@wind-mobi.com 2011.12.02 begin
+# Add HX8357C LCD support.
+config BCM_LCD_HX8357C
+        tristate "LCD Controller- HX8357C controller"
+        default N
+        help
+	  HVGA LCD panel (HX8357C controller)
+# xiongbiao@wind-mobi.com 2011.12.02 end
+
+# liubing@wind-mobi.com 2011.02.07 begin
+# Add HX8363B LCD support.
+config BCM_LCD_HX8363B_YT40F26B0
+        tristate "LCD Controller- HX8363B controller"
+        default N
+        help
+	  WVGA LCD panel (HX8363B controller)
+# liubing@wind-mobi.com 2012.02.07 end
+
+# xiongbiao@wind-mobi.com 2011.02.15 begin
+# Add HX8369A_YT40F25J0 LCD support.
+config BCM_LCD_HX8369A_YT40F25J0
+        tristate "LCD Controller- HX8369A controller"
+        default N
+        help
+	  WVGA LCD panel (HX8369A controller)
+# xiongbiao@wind-mobi.com 2011.02.15 end
+
+config BCM_LCD_S6D04K1_LUISA_HW02
+        tristate "LCD Panel- S6D04K1 controller"
+        default N
+        help
+	  QVGA LCD panel (S6D04H0A01 controller)
+
+if BCM_LCD_NT35582 || BCM_LCD_R61581 || BCM_LCD_R61581B0
+menu "Custom display resolution"
+config ENABLE_HVGA
+    bool "Enable HVGA display"
+    depends on BCM_LCD_NT35582
+    default y
+    ---help---
+    Select this to enable HVGA display
+
+config ENABLE_QVGA
+    bool "Enable QVGA display"
+    depends on (BCM_LCD_NT35582 || BCM_LCD_R61581 || BCM_LCD_R61581B0) && !ENABLE_HVGA
+    default n
+    ---help---
+    Select this to enable QVGA display
+endmenu
+endif
+
+config BCM_LCD_BTG222432
+        tristate "HYUNDAI BTG222432 LCD support"
+        depends on MACH_MARTINI || BOARD_BONDRAY || BOARD_EXPLORER
+        ---help---
+         Support for HYUNDAI BTG222432 LCD
+         Say Y here to enable HYUNDAI BTG222432 LCD driver
+         Say m to make it a loadable module
+
+config BCM_LCD_HX8352_DF2440V8
+    tristate "Wintek HX8352 DF2440V8 LCD support"
+    depends on BOARD_BRAVA || BOARD_BRAVA_EDN10
+    ---help---
+     Support for WINTEK HX8352 DF2440V8 LCD Driver
+     Say Y here to enable Wintek HX8352 DF2440V8 LCD driver
+     Say m to make it a loadable module
+
+config BCM_LCD_HX8347_TFT1P5158
+    tristate "Truely HX8347 TFT1P5158 LCD support"
+     default n
+    ---help---
+     Support for Truely HX8347 TFT1P5158 LCD Driver
+     Say Y here to enable Truely HX8347 TFT1P5158 LCD driver
+     Say m to make it a loadable module
+
+config BCM_LCD_SKIP_INIT
+    bool "Skip LCD controller and panel initialization"
+     default n
+    ---help---
+     Support for skipping LCD controller and panel initialization.
+     Say Y here if bootloader does the job of initialization
+
+config ARGB8888
+    bool "Enable 24bit colour mode"
+#    depends on BCM_LCD_NT35582 || BCM_LCD_R61581 ||BCM_LCD_HX8357C_GZ3513||BCM_LCD_HX8363B_YT40F26B0||BCM_LCD_HX8369A_T43KPS06||BCM_LCD_HX8369A_TFT480800
+    depends on LCD_DSI_DRV_ALL || LCD_L400_DSI_DRV_ALL
+    default n
+    ---help---
+    Say Y to enable 24bit colour mode
+
+endmenu

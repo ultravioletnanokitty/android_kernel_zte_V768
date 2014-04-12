@@ -1,0 +1,94 @@
+diff --git a/drivers/input/touchscreen/synaptics_i2c_rmi.c b/drivers/input/touchscreen/synaptics_i2c_rmi.c
+index 83a01da..65ddf0e 100644
+--- a/drivers/input/touchscreen/synaptics_i2c_rmi.c
++++ b/drivers/input/touchscreen/synaptics_i2c_rmi.c
+@@ -21,6 +21,8 @@
+ #ifdef CONFIG_HAS_EARLYSUSPEND
+ #include <linux/earlysuspend.h>
+ #endif
++#include <linux/proc_fs.h>
++#include <linux/kobject.h>
+ #include <linux/input/synaptics_rmi.h>
+ #include "synaptics_i2c_rmi.h"
+ 
+@@ -727,7 +729,7 @@ static int synaptics_rmi4_f11_abs_report(struct synaptics_rmi4_data *rmi4_data,
+ 
+ 	if (touch_count) {	
+ 			for (finger = 0; finger < touch_count; finger++) {
+-				if(y[finger] > AXIS_RANGE_MAX_Y + 20 && y[finger] < virtual_key_event[0][2] + virtual_key_event[0][3]/2)
++				if(y[finger] > AXIS_RANGE_MAX_Y + 5 && y[finger] < virtual_key_event[0][2] + virtual_key_event[0][3]/2)
+ 		                {
+ 					for(retry = 0; retry < 5; retry++)
+ 					{
+@@ -756,8 +758,8 @@ static int synaptics_rmi4_f11_abs_report(struct synaptics_rmi4_data *rmi4_data,
+ 		if ((key_flag == 1) && virtual_lastkey) {
+ 			input_report_key(rmi4_data->input_dev, virtual_lastkey , 0);	
+ 			key_flag = 0;
+-	    }
+-		input_mt_sync(rmi4_data->input_dev);
++	        } else
++		    input_mt_sync(rmi4_data->input_dev);
+ 	}
+ 	
+ 	input_sync(rmi4_data->input_dev);
+@@ -1943,6 +1945,19 @@ exit:
+ }
+ EXPORT_SYMBOL(synaptics_rmi4_new_function);
+ 
++
++
++/* yaogangxiang@wind-mobi.com 2012.0928 begin */
++//for Emode reading TP info
++static int read_tpid(char *buf, char **start, off_t off, int count, int *eof, void *data)
++{
++    int ret;
++
++    ret = sprintf(buf, "%s", "synaptics-s2200");
++
++    return ret;
++}
++/* yaogangxiang@wind-mobi.com 2012.0928 end */
+  /**
+  * synaptics_rmi4_probe()
+  *
+@@ -1967,6 +1982,11 @@ static int __devinit synaptics_rmi4_probe(struct i2c_client *client,
+ 	struct synaptics_rmi4_data *rmi4_data;
+ 	const struct synaptics_rmi4_platform_data *platform_data =
+ 			client->dev.platform_data;
++/* yaogangxiang@wind-mobi.com 2012.0928 begin */
++//for Emode reading TP info
++        static struct proc_dir_entry *TP_pdir;
++        static struct proc_dir_entry *TPid_point;
++/* yaogangxiang@wind-mobi.com 2012.0928 end */
+ 
+ 	if (!i2c_check_functionality(client->adapter, I2C_FUNC_SMBUS_BYTE_DATA)) {
+ 		dev_err(&client->dev, "%s SMBus byte data not supported\n", __func__);
+@@ -2031,7 +2051,7 @@ static int __devinit synaptics_rmi4_probe(struct i2c_client *client,
+ 	rmi4_data->input_dev->dev.parent = &client->dev;
+ 	input_set_drvdata(rmi4_data->input_dev, rmi4_data);
+ 
+-    rmi4_data->input_dev->keybit[BIT_WORD(BTN_TOUCH)] = BIT_MASK(BTN_TOUCH);
++        rmi4_data->input_dev->keybit[BIT_WORD(BTN_TOUCH)] = BIT_MASK(BTN_TOUCH);
+ 	int i = 0;
+ 	for (i=0; i < 5; i++)
+ 	{
+@@ -2078,6 +2098,19 @@ static int __devinit synaptics_rmi4_probe(struct i2c_client *client,
+ 		goto err_query_device;
+ 	}
+ 
++/* yaogangxiang@wind-mobi.com 2012.0928 begin */
++//for Emode reading TP info
++    TP_pdir = proc_mkdir("TPdir", NULL);
++    if (TP_pdir == NULL)
++        pr_err("create /proc/TPdir error!\n");
++
++    TPid_point = create_proc_read_entry("TP_id",0444,TP_pdir,read_tpid,NULL);
++    if (TPid_point == NULL) {
++        pr_err("create /proc/lcddir error!\n");
++        remove_proc_entry("TPdir",NULL);
++    }
++/* yaogangxiang@wind-mobi.com 2012.0928 end */
++
+ 	if (platform_data->gpio_config) {
+ 		retval = platform_data->gpio_config(platform_data->gpio_irq, true);
+ 		if (retval < 0) {

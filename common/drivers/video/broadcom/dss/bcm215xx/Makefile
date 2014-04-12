@@ -1,0 +1,26 @@
+EXTRA_CFLAGS += -I$(BCM_LCD_INCLUDE)
+
+ifeq ($(CONFIG_ARCH_BCM215XX), y)
+EXTRA_CFLAGS += -D_ATHENA_
+endif
+
+ifeq ($(CONFIG_ARCH_BCM21553_A0),y)
+EXTRA_CFLAGS				+= -DCHIP_REVISION=10
+endif
+ifeq ($(CONFIG_ARCH_BCM21553_B0),y)
+EXTRA_CFLAGS				+= -DCHIP_REVISION=20
+endif
+ifeq ($(CONFIG_ARCH_BCM21553_B1),y)
+EXTRA_CFLAGS				+= -DCHIP_REVISION=20
+endif
+
+##obj-$(CONFIG_BCM215XX_DSS) += lcdc.o
+##ifeq ($(CONFIG_LCD_CONTROLLER_LEGACY),y)
+ifneq ($(CONFIG_LCD_CONTROLLER_DSI),y)
+##obj-$(CONFIG_BCM215XX_DSS) += lcdc_parallel.o
+obj-$(CONFIG_BCM215XX_DSS) += lcdc.o
+endif
+ifeq ($(CONFIG_LCD_CONTROLLER_DSI),y)
+obj-$(CONFIG_BCM215XX_DSS) += lcdc_common.o
+obj-$(CONFIG_BCM215XX_DSS) += lcdc_dsi.o
+endif

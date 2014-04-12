@@ -1,0 +1,61 @@
+# Sample variables file for BCM94330 SD FCBGA AGB McLaren board
+# SS TOTORO R03(single iPA+iLNA, 26MHz) 110413
+manfid=0x2d0
+prodid=0x0532
+vendid=0x14e4
+devid=0x4360
+boardtype=0x0532
+boardrev=0x40
+sromrev=3
+
+#boardflags: use a SP3T sw share with BT, 2.4GHz iLNA and iPA
+boardflags=0x00080201
+
+nocrc=1
+xtalfreq=26000
+boardnum=22
+
+# aa2g=1 means by default only one antenna, MAIN RF.(aa2g=3 is for diversity)
+aa2g=1
+ag0=255
+ccode=ALL
+
+# 2.4GHz PA parameters are preliminary 
+pa0b0=0x1463
+pa0b1=0xFDAF
+pa0b2=0xFF78
+rssismf2g=0xa
+rssismc2g=0x3
+rssisav2g=0x7
+
+maxp2ga0=70
+
+cckpo=0
+ofdm2gpo=0x66666666
+mcs2gpo0=0x8888
+mcs2gpo1=0x8888
+
+cckdigfilttype=22
+ofdmdigfilttype=2
+
+macaddr=00:90:4c:c5:12:38
+#il0macaddr=00:90:4c:c5:12:38
+#wl0id=0x431b
+
+rfreg033=0x19
+rfreg033_cck=0x1f
+txalpfbyp2g=1
+bphyscale=17
+pacalidx2g=65
+dacrate2g=160
+
+swctrlmap_2g=0x44844484,0x42824282,0x40804484,0x818282,0x1ff
+xtalmode=0x20,0x4,0
+pa0itssit=0x20
+sd_gpout=0
+sd_oobonly=1
+sd_gpval=1
+
+btc_params68=0x190
+btc_params70=1500
+btc_params80=0
